@@ -1,0 +1,10 @@
+#!/usr/bin/expect -f
+
+set timeout -1
+
+spawn ./deploy_capes.sh
+
+expect "permissions\r"
+send "y\r\"
+
+expect eof
