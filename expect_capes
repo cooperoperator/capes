@@ -2,7 +2,7 @@
 
 set timeout -1
 
-spawn ./deploy_capes.sh
+spawn ./home/capes/capes/deploy_capes.sh
 
 expect "permissions\r"
 send "y\r\"
