@@ -4,7 +4,7 @@ set timeout -1
 
 spawn ./home/capes/capes/deploy_capes.sh
 
-expect "permissions\r"
+expect "Continue with installation?\r"
 send "y\r"
 
 expect eof
