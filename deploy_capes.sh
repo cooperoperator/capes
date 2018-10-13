@@ -17,27 +17,27 @@ sudo sed -i 's/localpkg_gpgcheck=1/localpkg_gpgcheck=0/' /etc/yum.conf
 
 clear
 # Create your Gitea passphrase
-echo "Create your Gitea passphrase for the MySQL database and press [Enter]. You will create your Gitea administration credentials after the installation."
+echo "Creating the Gitea passphrase for the MySQL database. Gitea administration credentials must be created after installation."
 giteapassphrase="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 
 # Create your HackMD passphrase
-echo "Create your HackMD passphrase for the MySQL database and press [Enter]. You will create your specific HackMD credentials after the installation."
+echo "Creating the HackMD passphrase for the MySQL database. HackMD credentials must be created after installation."
 hackmdpassphrase="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 
 # Create your Mattermost passphrase
-echo "Create your Mattermost passphrase for the MySQL database and press [Enter]. You will create your Mattermost administration credentials after the installation."
+echo "Creating the Mattermost passphrase for the MySQL database. Mattermost administration credentials must be created after installation."
 mattermostpassphrase="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 
 # Create your Mumble passphrase
-echo "Create your Mumble SuperUser passphrase and press [Enter]."
+echo "Creating the Mumble SuperUser passphrase."
 mumblepassphrase="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 
 # Create your CAPES Landing Page passphrase
-echo "Create your CAPES Landing Page passphrase for the account \"operator\" and press [Enter]."
+echo "Creating the CAPES Landing Page passphrase for the account \"operator\"."
 capespassphrase="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 
 # Creat your mariaDB root password
-echo "Creating your mariaDB passphrase."
+echo "Creating the mariaDB passphrase."
 mariadbpassphrase="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 
 # Set your hostname address as a variable. This is for instructions below.
