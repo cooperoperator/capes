@@ -15,32 +15,30 @@ sudo sed -i 's/localpkg_gpgcheck=1/localpkg_gpgcheck=0/' /etc/yum.conf
 ##### Collect Credentials ######
 ################################
 
-sudo yum -y install pwgen
-
 clear
 # Create your Gitea passphrase
 echo "Create your Gitea passphrase for the MySQL database and press [Enter]. You will create your Gitea administration credentials after the installation."
-giteapassphrase=$(pwgen 28 1)
+giteapassphrase="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 
 # Create your HackMD passphrase
 echo "Create your HackMD passphrase for the MySQL database and press [Enter]. You will create your specific HackMD credentials after the installation."
-hackmdpassphrase=$(pwgen 28 1)
+hackmdpassphrase="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 
 # Create your Mattermost passphrase
 echo "Create your Mattermost passphrase for the MySQL database and press [Enter]. You will create your Mattermost administration credentials after the installation."
-mattermostpassphrase=$(pwgen 28 1)
+mattermostpassphrase="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 
 # Create your Mumble passphrase
 echo "Create your Mumble SuperUser passphrase and press [Enter]."
-mumblepassphrase=$(pwgen 28 1)
+mumblepassphrase="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 
 # Create your CAPES Landing Page passphrase
 echo "Create your CAPES Landing Page passphrase for the account \"operator\" and press [Enter]."
-capespassphrase=$(pwgen 28 1)
+capespassphrase="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 
 # Creat your mariaDB root password
 echo "Creating your mariaDB passphrase."
-mariadbpassphrase=$(pwgen 28 1)
+mariadbpassphrase="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 
 # Set your hostname address as a variable. This is for instructions below.
 HOSTNAME="$(hostname -f)"
