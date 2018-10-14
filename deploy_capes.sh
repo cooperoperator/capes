@@ -18,27 +18,27 @@ sudo sed -i 's/localpkg_gpgcheck=1/localpkg_gpgcheck=0/' /etc/yum.conf
 clear
 # Create your Gitea passphrase
 echo "Creating the Gitea passphrase for the MySQL database. Gitea administration credentials must be created after installation."
-giteapassphrase="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
+giteapassphrase="$(cat /dev/random | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 
 # Create your HackMD passphrase
 echo "Creating the HackMD passphrase for the MySQL database. HackMD credentials must be created after installation."
-hackmdpassphrase="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
+hackmdpassphrase="$(cat /dev/random | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 
 # Create your Mattermost passphrase
 echo "Creating the Mattermost passphrase for the MySQL database. Mattermost administration credentials must be created after installation."
-mattermostpassphrase="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
+mattermostpassphrase="$(cat /dev/random | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 
 # Create your Mumble passphrase
 echo "Creating the Mumble SuperUser passphrase."
-mumblepassphrase="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
+mumblepassphrase="$(cat /dev/random | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 
 # Create your CAPES Landing Page passphrase
 echo "Creating the CAPES Landing Page passphrase for the account \"operator\"."
-capespassphrase="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
+capespassphrase="$(cat /dev/random | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 
 # Creat your mariaDB root password
 echo "Creating the mariaDB passphrase."
-mariadbpassphrase="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
+mariadbpassphrase="$(cat /dev/random | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 
 # Set your hostname address as a variable. This is for instructions below.
 HOSTNAME="$(hostname -f)"
@@ -385,7 +385,7 @@ sudo yum install thehive cortex -y
 # ~~~~~
 # The secret key is used to secure cryptographics functions.
 # If you deploy your application to several instances be sure to use the same key!
-play.crypto.secret="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
+play.crypto.secret="$(cat /dev/random | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 _EOF_
 ) | sudo tee -a /etc/thehive/application.conf
 
@@ -395,7 +395,7 @@ _EOF_
 # ~~~~~
 # The secret key is used to secure cryptographics functions.
 # If you deploy your application to several instances be sure to use the same key!
-play.crypto.secret="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
+play.crypto.secret="$(cat /dev/random | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 _EOF_
 ) | sudo tee -a /etc/cortex/application.conf
 
