@@ -2,7 +2,7 @@
 
 set timeout -1
 
-spawn ./deploy_capes.sh
+spawn /usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-geoip
 
 expect "Continue with installation?\r"
 send "y\r"
