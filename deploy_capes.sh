@@ -41,6 +41,16 @@ capespassphrase="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 
 echo "Creating the mariaDB passphrase."
 mariadbpassphrase="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 
+sudo touch /capespw
+sudo echo "The Mattermost passphrase for the MariaDB database is: "$mattermostpassphrase >>  /capespw
+sudo echo "\n The Gitea passphrase for the MariaDB database is: "$giteapassphrase >>  /capespw
+sudo echo "\n The HackMD passphrase for the MariaDB database and the service administration account is: "$hackmdpassphrase >>  /capespw
+sudo echo "\n The Mumble SuperUser passphrase is: "$mumblepassphrase >>  /capespw
+sudo echo "\n The CAPES landing passphrase for the account \"operator\" is: "$capespassphrase >>  /capespw
+sudo echo "\n Please see the "Build, Operate, Maintain" documentation for the post-installation steps." >>  /capespw
+sudo echo "\n The CAPES landing page has been successfully deployed. Browse to http://$HOSTNAME (or http://$HOSTNAME if you don't have DNS set up) to begin using the services." >>  /capespw
+sudo echo "\n The mariaDB password is: "$mariadbpassphrase >> /capespw
+
 # Set your hostname address as a variable. This is for instructions below.
 HOSTNAME="$(hostname -f)"
 
@@ -469,7 +479,6 @@ sudo curl https://gchq.github.io/CyberChef/cyberchef.htm -o /usr/share/nginx/htm
 ################################
 ######## Heartbeat #############
 ################################
-
 sudo yum install -y https://artifacts.elastic.co/downloads/beats/heartbeat/heartbeat-5.6.5-x86_64.rpm
 sudo cp beats/heartbeat.yml /etc/heartbeat/heartbeat.yml
 sudo sed -i "s/passphrase/$capespassphrase/" /etc/heartbeat/heartbeat.yml
