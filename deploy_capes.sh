@@ -601,12 +601,12 @@ cat /dev/null > ~/.bash_history && history -c
 ######### Success Page #########
 ################################
 clear
-sudo touch /capespw
-sudo echo "The Mattermost passphrase for the MariaDB database is: "$mattermostpassphrase >>  /capespw
-sudo echo "\n The Gitea passphrase for the MariaDB database is: "$giteapassphrase >>  /capespw
-sudo echo "\n The HackMD passphrase for the MariaDB database and the service administration account is: "$hackmdpassphrase >>  /capespw
-sudo echo "\n The Mumble SuperUser passphrase is: "$mumblepassphrase >>  /capespw
-sudo echo "\n The CAPES landing passphrase for the account \"operator\" is: "$capespassphrase >>  /capespw
-sudo echo "\n Please see the "Build, Operate, Maintain" documentation for the post-installation steps." >>  /capespw
-sudo echo "\n The CAPES landing page has been successfully deployed. Browse to http://$HOSTNAME (or http://$HOSTNAME if you don't have DNS set up) to begin using the services." >>  /capespw
-sudo echo "\n The mariaDB password is: "$mariadbpassphrase >> /capespw
+sudo touch ~/capespw
+sudo echo "The Mattermost passphrase for the MariaDB database is: "$mattermostpassphrase >> ~/capespw
+sudo echo "\n The Gitea passphrase for the MariaDB database is: "$giteapassphrase >> ~/capespw
+sudo echo "\n The HackMD passphrase for the MariaDB database and the service administration account is: "$hackmdpassphrase >> ~/capespw
+sudo echo "\n The Mumble SuperUser passphrase is: "$mumblepassphrase >> ~/capespw
+sudo echo "\n The CAPES landing passphrase for the account \"operator\" is: "$capespassphrase >> ~/capespw
+sudo echo "\n Please see the "Build, Operate, Maintain" documentation for the post-installation steps." >> ~/capespw
+sudo echo "\n The CAPES landing page has been successfully deployed. Browse to http://$HOSTNAME (or http://$HOSTNAME if you don't have DNS set up) to begin using the services." >> ~/capespw
+sudo echo "\n The mariaDB password is: "$mariadbpassphrase >> ~/capespw
