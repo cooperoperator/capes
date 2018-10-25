@@ -188,8 +188,9 @@ EOF'
 sudo yum install mariadb-server firewalld -y
 
 # Configure MariaDB
-sudo bash ./mysql_secure.sh "$mariadbpassphrase"
 sudo systemctl start mariadb.service
+sudo bash ./mysql_secure.sh "$mariadbpassphrase"
+
 mysql -u root -e "CREATE DATABASE mattermost;"
 mysql -u root -e "GRANT ALL PRIVILEGES ON mattermost.* TO 'mattermost'@'localhost' IDENTIFIED BY '$mattermostpassphrase';"
 
