@@ -191,8 +191,8 @@ sudo yum install mariadb-server firewalld -y
 sudo systemctl start mariadb.service
 sudo bash ./mysql_secure.sh "$mariadbpassphrase"
 
-mysql -u root -e "CREATE DATABASE mattermost;"
-mysql -u root -e "GRANT ALL PRIVILEGES ON mattermost.* TO 'mattermost'@'localhost' IDENTIFIED BY '$mattermostpassphrase';"
+mysql -u root -p "$mariadbpassphrase" -e "CREATE DATABASE mattermost;"
+mysql -u root -p "$mariadbpassphrase" -e "GRANT ALL PRIVILEGES ON mattermost.* TO 'mattermost'@'localhost' IDENTIFIED BY '$mattermostpassphrase';"
 
 # Build Mattermost
 sudo mkdir -p /opt/mattermost/data
@@ -219,7 +219,7 @@ sudo -u mattermost /opt/mattermost/bin/./platform
 cd -
 
 # Correct the MariaDB formatting
-mysql -u root -e "ALTER TABLE mattermost.Audits ENGINE = MyISAM;ALTER TABLE mattermost.ChannelMembers ENGINE = MyISAM;ALTER TABLE mattermost.Channels ENGINE = MyISAM;ALTER TABLE mattermost.ClusterDiscovery ENGINE = MyISAM;ALTER TABLE mattermost.Commands ENGINE = MyISAM;ALTER TABLE mattermost.CommandWebhooks ENGINE = MyISAM;ALTER TABLE mattermost.Compliances ENGINE = MyISAM;ALTER TABLE mattermost.Emoji ENGINE = MyISAM;ALTER TABLE mattermost.FileInfo ENGINE = MyISAM;ALTER TABLE mattermost.IncomingWebhooks ENGINE = MyISAM;ALTER TABLE mattermost.Jobs ENGINE = MyISAM;ALTER TABLE mattermost.Licenses ENGINE = MyISAM;ALTER TABLE mattermost.OAuthAccessData ENGINE = MyISAM;ALTER TABLE mattermost.OAuthApps ENGINE = MyISAM;ALTER TABLE mattermost.OAuthAuthData ENGINE = MyISAM;ALTER TABLE mattermost.OutgoingWebhooks ENGINE = MyISAM;ALTER TABLE mattermost.Posts ENGINE = MyISAM;ALTER TABLE mattermost.Preferences ENGINE = MyISAM;ALTER TABLE mattermost.Reactions ENGINE = MyISAM;ALTER TABLE mattermost.Sessions ENGINE = MyISAM;ALTER TABLE mattermost.Status ENGINE = MyISAM;ALTER TABLE mattermost.Systems ENGINE = MyISAM;ALTER TABLE mattermost.TeamMembers ENGINE = MyISAM;ALTER TABLE mattermost.Teams ENGINE = MyISAM;ALTER TABLE mattermost.Tokens ENGINE = MyISAM;ALTER TABLE mattermost.UserAccessTokens ENGINE = MyISAM;ALTER TABLE mattermost.Users ENGINE = MyISAM;"
+mysql -u root -p "$mariadbpassphrase" -e "ALTER TABLE mattermost.Audits ENGINE = MyISAM;ALTER TABLE mattermost.ChannelMembers ENGINE = MyISAM;ALTER TABLE mattermost.Channels ENGINE = MyISAM;ALTER TABLE mattermost.ClusterDiscovery ENGINE = MyISAM;ALTER TABLE mattermost.Commands ENGINE = MyISAM;ALTER TABLE mattermost.CommandWebhooks ENGINE = MyISAM;ALTER TABLE mattermost.Compliances ENGINE = MyISAM;ALTER TABLE mattermost.Emoji ENGINE = MyISAM;ALTER TABLE mattermost.FileInfo ENGINE = MyISAM;ALTER TABLE mattermost.IncomingWebhooks ENGINE = MyISAM;ALTER TABLE mattermost.Jobs ENGINE = MyISAM;ALTER TABLE mattermost.Licenses ENGINE = MyISAM;ALTER TABLE mattermost.OAuthAccessData ENGINE = MyISAM;ALTER TABLE mattermost.OAuthApps ENGINE = MyISAM;ALTER TABLE mattermost.OAuthAuthData ENGINE = MyISAM;ALTER TABLE mattermost.OutgoingWebhooks ENGINE = MyISAM;ALTER TABLE mattermost.Posts ENGINE = MyISAM;ALTER TABLE mattermost.Preferences ENGINE = MyISAM;ALTER TABLE mattermost.Reactions ENGINE = MyISAM;ALTER TABLE mattermost.Sessions ENGINE = MyISAM;ALTER TABLE mattermost.Status ENGINE = MyISAM;ALTER TABLE mattermost.Systems ENGINE = MyISAM;ALTER TABLE mattermost.TeamMembers ENGINE = MyISAM;ALTER TABLE mattermost.Teams ENGINE = MyISAM;ALTER TABLE mattermost.Tokens ENGINE = MyISAM;ALTER TABLE mattermost.UserAccessTokens ENGINE = MyISAM;ALTER TABLE mattermost.Users ENGINE = MyISAM;"
 
 # Create the Mattermost service
 sudo bash -c 'cat > /etc/systemd/system/mattermost.service <<EOF
@@ -257,8 +257,8 @@ sudo bin/setup
 cd -
 
 # Set up the HackMD database
-mysql -u root -e "CREATE DATABASE hackmd;"
-mysql -u root -e "GRANT ALL PRIVILEGES ON hackmd.* TO 'hackmd'@'localhost' IDENTIFIED BY '$hackmdpassphrase';"
+mysql -u root -p "$mariadbpassphrase" -e "CREATE DATABASE hackmd;"
+mysql -u root -p "$mariadbpassphrase" -e "GRANT ALL PRIVILEGES ON hackmd.* TO 'hackmd'@'localhost' IDENTIFIED BY '$hackmdpassphrase';"
 
 # Update the HackMD configuration files
 sudo sed -i 's/"username":\ ""/"username":\ "hackmd"/' /opt/hackmd/config.json
@@ -305,10 +305,10 @@ sudo yum install http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git
 sudo yum update git -y
 
 # Configure MariaDB
-mysql -u root -e "CREATE DATABASE gitea;"
-mysql -u root -e "GRANT ALL PRIVILEGES ON gitea.* TO 'gitea'@'localhost' IDENTIFIED BY '$giteapassphrase';"
-mysql -u root -e "FLUSH PRIVILEGES;"
-mysql -u root -e "set global innodb_file_format = Barracuda;
+mysql -u root -p "$mariadbpassphrase" -e "CREATE DATABASE gitea;"
+mysql -u root -p "$mariadbpassphrase" -e "GRANT ALL PRIVILEGES ON gitea.* TO 'gitea'@'localhost' IDENTIFIED BY '$giteapassphrase';"
+mysql -u root -p "$mariadbpassphrase" -e "FLUSH PRIVILEGES;"
+mysql -u root -p "$mariadbpassphrase" -e "set global innodb_file_format = Barracuda;
 set global innodb_file_per_table = on;
 set global innodb_large_prefix = 1;
 use gitea;
