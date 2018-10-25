@@ -187,9 +187,20 @@ EOF'
 # Install dependencies
 sudo yum install mariadb-server firewalld -y
 
-# Configure MariaDB
+################################
+### Secure MySQL installtion ###
+################################
+clear
+echo "In a few seconds we are going to secure your MariaDB configuration. You'll be asked for your MariaDB root passphrase (which hasn't been set), you'll set the MariaDB root passphrase and then be asked to confirm some security configurations."
+echo $mariadbpassphrase
 sudo systemctl start mariadb.service
 sudo bash ./mysql_secure.sh "$mariadbpassphrase"
+sudo sh -c 'echo [mysqld] > /etc/my.cnf.d/bind-address.cnf'
+sudo sh -c 'echo bind-address=127.0.0.1 >> /etc/my.cnf.d/bind-address.cnf'
+sudo systemctl restart mariadb.service
+sudo bash ./mysql_secure.sh "$mariadbpassphrase" "$mariadbpassphrase"
+
+# Configure MariaDB
 
 mysql -u root -p"$mariadbpassphrase" -e "CREATE DATABASE mattermost;"
 mysql -u root -p"$mariadbpassphrase" -e "GRANT ALL PRIVILEGES ON mattermost.* TO 'mattermost'@'localhost' IDENTIFIED BY '$mattermostpassphrase';"
@@ -563,16 +574,6 @@ sudo systemctl start mattermost.service
 
 # Configure the Murmur SuperUser account
 sudo /opt/murmur/murmur.x86 -ini /etc/murmur.ini -supw $mumblepassphrase
-
-################################
-### Secure MySQL installtion ###
-################################
-clear
-echo "In a few seconds we are going to secure your MariaDB configuration. You'll be asked for your MariaDB root passphrase (which hasn't been set), you'll set the MariaDB root passphrase and then be asked to confirm some security configurations."
-echo $mariadbpassphrase
-sudo sh -c 'echo [mysqld] > /etc/my.cnf.d/bind-address.cnf'
-sudo sh -c 'echo bind-address=127.0.0.1 >> /etc/my.cnf.d/bind-address.cnf'
-sudo systemctl restart mariadb.service
 
 ################################
 ## Copy CAPES Function Check ###
