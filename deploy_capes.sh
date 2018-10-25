@@ -500,7 +500,7 @@ sudo sed -i "s/passphrase/$capespassphrase/" /etc/heartbeat/heartbeat.yml
 ################################
 sudo yum install -y https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.6.5-x86_64.rpm
 sudo cp beats/filebeat.yml /etc/filebeat/filebeat.yml
-sudo /usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-user-agent
+# sudo /usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-user-agent
 
 # Elevate permissions for Java Runtime to install ingest-geoip when prompted.
 # sudo expect ./geoip_install_and_elevate.sh # <--Expect script doesn't do the thing, commenting this out while investigating why.
@@ -578,7 +578,7 @@ sudo /opt/murmur/murmur.x86 -ini /etc/murmur.ini -supw $mumblepassphrase
 ################################
 ## Copy CAPES Function Check ###
 ################################
-cp capes_processes /usr/bin/local/
+cp capes_processes /usr/local/bin
 chmod 0755 /usr/local/bin/capes_processes
 
 ################################
